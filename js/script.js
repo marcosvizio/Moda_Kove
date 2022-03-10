@@ -1,48 +1,83 @@
 // Probamos si el archivo js esta bien enlazado con un console log y damos la bienvenida al usuario
+
 console.log("Bienvenidos a Moda Kove");
 
-let consultaComprar = confirm("Desea realizar alguna compra por nuestra tienda online?")
+// Modifico con INNER TEXT el titulo de la pagina
 
-let subTotalCompra = 0;
+let tituloPagina = document.getElementById("tituloPag")
 
-let cantidadProductos = 0;
+tituloPagina.innerText = "Moda Kove - Tienda Web Oficial"
 
-class productos {
+// Le aplicamos un class a nuestras etiquetas HTML <li>
+
+let navegadorPagina = document.getElementsByTagName("li")
+
+navegadorPagina.className = "navegador"
+
+// Agrego elementos con la función document.createElement()
+
+let parrafoModaKove = document.createElement("p");
+
+parrafoModaKove.innerHTML = "<p>¡Esperamos poder cumplir todas sus expectativas desde la atención al cliente hasta calidad de la ropa!</p>";
+
+document.body.append(parrafoModaKove)
+
+// Hago un constructor
+
+class Producto {
     constructor (producto,precio,stock) {
-        this.producto = producto;
+        this.nombreProducto = producto;
         this.precio = parseInt(precio);
         this.stock = parseInt(stock);
     }
     mostrarProducto(){
-        alert(`Nuestros productos son:\nProducto: ${this.producto}, Precio: $${this.precio} y Stock: ${this.stock}`)
+        alert(`Nuestros productos son:\nProducto: ${this.nombreProducto}, Precio: $${this.precio} y Stock: ${this.stock}`)
     }
     agregarCanasto(){
         subTotalCompra = subTotalCompra + this.precio
     }
+    actualizacionPrecio(){
+        this.precio = this.precio * 1.30;
+    }
 }
 
-const remera = new productos("Remera", 2500, 10);
-const pantalon = new productos("Pantalon", 5000, 20);
-const zapatillas = new productos("Zapatillas", 3500, 8);
-const gorra = new productos("Gorra", 1000, 5);
-const campera = new productos("Campera", 4500, 10);
+// Creo los objetos que necesito gracias al constructor
+
+const remera = new Producto("Remera", 2500, 10);
+const pantalon = new Producto("Pantalon", 5000, 20);
+const zapatillas = new Producto("Zapatillas", 3500, 8);
+const gorra = new Producto("Gorra", 1000, 5);
+const campera = new Producto("Campera", 4500, 10);
 
 // Creo un array para ingresar ahi los objetos creados con el class
 
 const listaDeProductos = [];
-
 listaDeProductos.push(remera,pantalon,zapatillas,gorra,campera)
 
-for (const producto of listaDeProductos) {
-    console.log(`Tenemos este producto: ${producto.producto} y su precio es: ${producto.precio}`);
+// Utilizo el FOR... OF para mostrar todos los productos del ARRAY "listaDeProductos" al usuario
+
+for (const mostrarProducto of listaDeProductos) {
+    console.log(`Tenemos este producto: ${mostrarProducto.nombreProducto} y su precio es: $${mostrarProducto.precio}`);
 }
 
-// Utilizo MAP para tener un filtrado de los productos que su monto es menor a 3000.
+// Utilizo el FOR... OF para actualizar los precios de todos los productos
 
-const productosBaratos = listaDeProductos.filter(producto => producto.precio < 3000)
+for (const precioNuevo of listaDeProductos) {
+    precioNuevo.actualizacionPrecio();
+}
+
+// Utilizo el metodo FILTER para tener un filtrado de los productos que su monto es menor a 3000.
+
+const productosBaratos = listaDeProductos.filter(producto => producto.precio < 4000)
 console.log(productosBaratos);
 
 // Comienzo el if dependiendo lo que seleccione el usuario en el confirm, mostramos nuestros productos uno por uno y el usuario ingresa que prendas desea comprar
+
+let consultaComprar = confirm("Desea realizar alguna compra por nuestra tienda online?");
+
+let subTotalCompra = 0;
+
+let cantidadProductos = 0;
 
 if (consultaComprar == false) {
     alert("Gracias por visitar la tienda web de Mode Kobe!")
@@ -88,6 +123,14 @@ if (consultaComprar == false) {
         }   
     }
 }
+
+// Utilizamos DOM para saber los nombres y precios de los productos desde el HTML
+
+let inputIndexText = document.getElementById("buscadorTexto")
+let inputIndexBtn = document.getElementById("buscadorBoton")
+
+console.log(inputIndexText.innerHTML);
+console.log(inputIndexBtn.innerHTML);
 
 // Aplicamos la funcion flecha "interesesCompra" en el subtotal de la compra.
 
