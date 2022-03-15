@@ -2,19 +2,7 @@
 
 console.log("Bienvenidos a Moda Kove");
 
-// Modifico con INNER TEXT el titulo de la pagina
-
-let tituloPagina = document.getElementById("tituloPag")
-
-tituloPagina.innerText = "Moda Kove - Tienda Web Oficial"
-
-// Le aplicamos un class a nuestras etiquetas HTML <li>
-
-let navegadorPagina = document.getElementsByTagName("li")
-
-navegadorPagina.className = "navegador"
-
-// Agrego elementos con la función document.createElement()
+// Agrego elementos con la función document.createElement(). NO ES LO RECOMENDABLE USAR, PREFERIBLE HACERLO DESDE EL HTML. 
 
 let parrafoModaKove = document.createElement("p");
 
@@ -53,6 +41,7 @@ const campera = new Producto("Campera", 4500, 10);
 
 const listaDeProductos = [];
 listaDeProductos.push(remera,pantalon,zapatillas,gorra,campera)
+console.log(listaDeProductos[1].nombreProducto);
 
 // Utilizo el FOR... OF para mostrar todos los productos del ARRAY "listaDeProductos" al usuario
 
@@ -70,6 +59,67 @@ for (const precioNuevo of listaDeProductos) {
 
 const productosBaratos = listaDeProductos.filter(producto => producto.precio < 4000)
 console.log(productosBaratos);
+
+// Uso addEventListener para mostrar mensaje en consola y uso DOM para mostrar productos
+
+const btn1 = document.getElementById("productosBoton")
+
+btn1.onclick = () => {
+    for (const producto of listaDeProductos) {
+        let contenedor = document.createElement("div");
+        contenedor.innerHTML = `<h3>Producto: ${producto.nombreProducto}</h3>
+                                <p>Precio: $${producto.precio}<p>
+                                <p>Stock: ${producto.stock} unidades`;
+        document.body.appendChild(contenedor)
+    }
+}
+
+// Agrego un buscador de productos en la pagína implementando EVENTOS y DOM
+
+const btn2 = document.getElementById("buscadorBoton")
+
+btn2.addEventListener("click", () => {
+    const input = document.getElementById("entrada")
+    let productoBuscado = input.value
+    console.log(productoBuscado);
+    if (productoBuscado == "Remera"){
+        let contenedor = document.createElement("div")
+        contenedor.innerHTML = 
+        `<h3>El producto que usted busco es:</h3> 
+        <p>El producto es ${listaDeProductos[0].nombreProducto} y su precio es: $${listaDeProductos[0].precio}.</p>`
+        document.body.appendChild(contenedor)
+    } else if (productoBuscado == "Pantalon") {
+        let contenedor = document.createElement("div")
+        contenedor.innerHTML = 
+        `<h3>El producto que usted busco es:</h3> 
+        <p>El producto es ${listaDeProductos[1].nombreProducto} y su precio es: $${listaDeProductos[1].precio}.</p>`
+        console.log(contenedor);
+        document.body.appendChild(contenedor)
+    } else if (productoBuscado == "Zapatillas") {
+        let contenedor = document.createElement("div")
+        contenedor.innerHTML =  
+        `<h3>El producto que usted busco es:</h3> 
+        <p>El producto es ${listaDeProductos[2].nombreProducto} y su precio es: $${listaDeProductos[2].precio}.</p>`
+        document.body.appendChild(contenedor)
+    } else if (productoBuscado == "Gorra") {
+        let contenedor = document.createElement("div")
+        contenedor.innerHTML =  
+        `<h3>El producto que usted busco es:</h3> 
+        <p>El producto es ${listaDeProductos[3].nombreProducto} y su precio es: $${listaDeProductos[3].precio}.</p>`
+        document.body.appendChild(contenedor)
+    } else if (productoBuscado == "Campera") {
+        let contenedor = document.createElement("div")
+        contenedor.innerHTML =  
+        `<h3>El producto que usted busco es:</h3> 
+        <p>El producto es ${listaDeProductos[4].nombreProducto} y su precio es: $${listaDeProductos[4].precio}.</p>`
+        document.body.appendChild(contenedor)
+    } else {
+        let contenedor = document.createElement("div")
+        contenedor.innerHTML =  
+        `<h4>El producto que busca no se encuentra disponible.</h4>`
+        document.body.appendChild(contenedor)
+    }
+})
 
 // Comienzo el if dependiendo lo que seleccione el usuario en el confirm, mostramos nuestros productos uno por uno y el usuario ingresa que prendas desea comprar
 
@@ -123,14 +173,6 @@ if (consultaComprar == false) {
         }   
     }
 }
-
-// Utilizamos DOM para saber los nombres y precios de los productos desde el HTML
-
-let inputIndexText = document.getElementById("buscadorTexto")
-let inputIndexBtn = document.getElementById("buscadorBoton")
-
-console.log(inputIndexText.innerHTML);
-console.log(inputIndexBtn.innerHTML);
 
 // Aplicamos la funcion flecha "interesesCompra" en el subtotal de la compra.
 
