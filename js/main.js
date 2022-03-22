@@ -1,64 +1,39 @@
-// Probamos si el archivo js esta bien enlazado con un console log y damos la bienvenida al usuario
-
-console.log("Bienvenidos a Moda Kove");
-
-// Agrego elementos con la función document.createElement(). NO ES LO RECOMENDABLE USAR, PREFERIBLE HACERLO DESDE EL HTML. 
-
-let parrafoModaKove = document.createElement("p");
-
-parrafoModaKove.innerHTML = "<p>¡Esperamos poder cumplir todas sus expectativas desde la atención al cliente hasta calidad de la ropa!</p>";
-
-document.body.append(parrafoModaKove)
-
 // Hago un constructor
 
 class Producto {
-    constructor (producto,precio,stock) {
-        this.nombreProducto = producto;
-        this.precio = parseInt(precio);
+    constructor (nombreProducto,precio,stock,id) {
+        this.producto = nombreProducto;
+        this.precio = parseFloat(precio);
         this.stock = parseInt(stock);
+        this.id = parseInt(id)
     }
     mostrarProducto(){
-        alert(`Nuestros productos son:\nProducto: ${this.nombreProducto}, Precio: $${this.precio} y Stock: ${this.stock}`)
+        alert(`Nuestros productos son:\nProducto: ${this.producto}, Precio: $${this.precio},  Stock: ${this.stock} y ID: ${this.id}`)
     }
     agregarCanasto(){
         subTotalCompra = subTotalCompra + this.precio
-    }
-    actualizacionPrecio(){
-        this.precio = this.precio * 1.30;
     }
 }
 
 // Creo los objetos que necesito gracias al constructor
 
-const remera = new Producto("Remera", 2500, 10);
-const pantalon = new Producto("Pantalon", 5000, 20);
-const zapatillas = new Producto("Zapatillas", 3500, 8);
-const gorra = new Producto("Gorra", 1000, 5);
-const campera = new Producto("Campera", 4500, 10);
+const remera = new Producto("Remera", 2500, 10, 1);
+const pantalon = new Producto("Pantalon", 5000, 20, 2);
+const zapatillas = new Producto("Zapatillas", 3500, 8, 3);
+const gorra = new Producto("Gorra", 1000, 5, 4);
+const campera = new Producto("Campera", 4500, 10, 5);
 
 // Creo un array para ingresar ahi los objetos creados con el class
 
 const listaDeProductos = [];
 listaDeProductos.push(remera,pantalon,zapatillas,gorra,campera)
-console.log(listaDeProductos[1].nombreProducto);
-
-// Utilizo el FOR... OF para mostrar todos los productos del ARRAY "listaDeProductos" al usuario
-
-for (const mostrarProducto of listaDeProductos) {
-    console.log(`Tenemos este producto: ${mostrarProducto.nombreProducto} y su precio es: $${mostrarProducto.precio}`);
-}
-
-// Utilizo el FOR... OF para actualizar los precios de todos los productos
-
-for (const precioNuevo of listaDeProductos) {
-    precioNuevo.actualizacionPrecio();
-}
 
 // Utilizo el metodo FILTER para tener un filtrado de los productos que su monto es menor a 3000.
 
 const productosBaratos = listaDeProductos.filter(producto => producto.precio < 4000)
 console.log(productosBaratos);
+
+// Utilizo DOM, Eventos y JSON
 
 // Uso addEventListener para mostrar mensaje en consola y uso DOM para mostrar productos
 
@@ -67,7 +42,7 @@ const btn1 = document.getElementById("productosBoton")
 btn1.onclick = () => {
     for (const producto of listaDeProductos) {
         let contenedor = document.createElement("div");
-        contenedor.innerHTML = `<h3>Producto: ${producto.nombreProducto}</h3>
+        contenedor.innerHTML = `<h3>Producto: ${producto.producto}</h3>
                                 <p>Precio: $${producto.precio}<p>
                                 <p>Stock: ${producto.stock} unidades`;
         document.body.appendChild(contenedor)
@@ -82,32 +57,32 @@ btn2.addEventListener("click", () => {
     const input = document.getElementById("entrada")
     let productoBuscado = input.value
     console.log(productoBuscado);
-    if (productoBuscado == "Remera"){
+    if (productoBuscado == "Remera" || productoBuscado == "remera"){
         let contenedor = document.createElement("div")
         contenedor.innerHTML = 
         `<h3>El producto que usted busco es:</h3> 
         <p>El producto es ${listaDeProductos[0].nombreProducto} y su precio es: $${listaDeProductos[0].precio}.</p>`
         document.body.appendChild(contenedor)
-    } else if (productoBuscado == "Pantalon") {
+    } else if (productoBuscado == "Pantalon" || productoBuscado == "pantalon") {
         let contenedor = document.createElement("div")
         contenedor.innerHTML = 
         `<h3>El producto que usted busco es:</h3> 
         <p>El producto es ${listaDeProductos[1].nombreProducto} y su precio es: $${listaDeProductos[1].precio}.</p>`
         console.log(contenedor);
         document.body.appendChild(contenedor)
-    } else if (productoBuscado == "Zapatillas") {
+    } else if (productoBuscado == "Zapatillas" || productoBuscado == "zapatillas") {
         let contenedor = document.createElement("div")
         contenedor.innerHTML =  
         `<h3>El producto que usted busco es:</h3> 
         <p>El producto es ${listaDeProductos[2].nombreProducto} y su precio es: $${listaDeProductos[2].precio}.</p>`
         document.body.appendChild(contenedor)
-    } else if (productoBuscado == "Gorra") {
+    } else if (productoBuscado == "Gorra" || productoBuscado == "gorra") {
         let contenedor = document.createElement("div")
         contenedor.innerHTML =  
         `<h3>El producto que usted busco es:</h3> 
         <p>El producto es ${listaDeProductos[3].nombreProducto} y su precio es: $${listaDeProductos[3].precio}.</p>`
         document.body.appendChild(contenedor)
-    } else if (productoBuscado == "Campera") {
+    } else if (productoBuscado == "Campera" || productoBuscado == "campera") {
         let contenedor = document.createElement("div")
         contenedor.innerHTML =  
         `<h3>El producto que usted busco es:</h3> 
@@ -121,6 +96,65 @@ btn2.addEventListener("click", () => {
     }
 })
 
+// Implemento un carrito de compra
+
+const botonesAgregarCarrito = document.querySelectorAll(".btn-comprar")
+
+botonesAgregarCarrito.forEach((agregarCarrito) => {
+
+    agregarCarrito.addEventListener("click", botonCarritoClick);
+
+})
+
+const carritoItemsContainer = document.querySelector(".carrito-compra-container")
+
+console.log(carritoItemsContainer);
+
+function botonCarritoClick(event) {
+    const boton = event.target
+    // Capturo el <div> que contiene todo mi producto
+    const producto = boton.closest(".card")
+    //Capturo los items de mi producto del HTML
+    const nombreProducto = producto.querySelector(".card-title").textContent
+    const precioProducto = producto.querySelector(".precio-producto").textContent
+    const imagenProducto = producto.querySelector(".imagen-producto").src
+    
+    agregarItemsCarrito(nombreProducto, precioProducto, imagenProducto);
+}
+
+function agregarItemsCarrito(nombreProducto, precioProducto, imagenProducto) {
+    const carritoLista = document.createElement("div")
+    const carritoContenido = 
+    `<div class="row">
+        <div class="col-6">
+            <div class="d-flex align-items-center h-100 border-bottom pb-2 pt-3">
+                <img src='${imagenProducto}' class="imagen-producto-carrito">
+                <h6 class=" text-truncate ml-3 mb-0">${nombreProducto}</h6>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="d-flex align-items-center h-100 border-bottom pb-2 pt-3">
+                <p class="mb-0">${precioProducto}</p>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="d-flex justify-content-between align-items-center h-100 border-bottom pb-2 pt-3">
+                <input class="" type="number" value="1">
+                <button class="btn btn-danger" type="button">X</button>
+            </div>
+        </div>
+    </div>`;
+    carritoLista.innerHTML = carritoContenido
+    carritoItemsContainer.append(carritoLista)
+}
+
+// ¡Faltaria ingresar el localStorage para el carrito de compras! 
+
+// Aplico localStorage para almacenar los productos ahí
+
+localStorage.setItem("PRODUCTOS", JSON.stringify(listaDeProductos))
+let productosLocalStorage = localStorage.getItem('PRODUCTOS')
+
 // Comienzo el if dependiendo lo que seleccione el usuario en el confirm, mostramos nuestros productos uno por uno y el usuario ingresa que prendas desea comprar
 
 let consultaComprar = confirm("Desea realizar alguna compra por nuestra tienda online?");
@@ -130,7 +164,7 @@ let subTotalCompra = 0;
 let cantidadProductos = 0;
 
 if (consultaComprar == false) {
-    alert("Gracias por visitar la tienda web de Mode Kobe!")
+    alert("Gracias por visitar la tienda web de Mode Kove!")
 } else {
     remera.mostrarProducto();
     pantalon.mostrarProducto();
