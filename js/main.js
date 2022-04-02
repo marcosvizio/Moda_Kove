@@ -1,13 +1,13 @@
 // CONSTRUCTOR DE OBJETOS
 
 class Producto {
-    constructor (nombreProducto,precio,stock,id) {
+    constructor (nombreProducto,precio,id) {
         this.producto = nombreProducto;
         this.precio = parseFloat(precio);
         this.id = parseInt(id)
     }
     mostrarProducto(){
-        alert(`Nuestros productos son:\nProducto: ${this.producto}, Precio: $${this.precio},  Stock: ${this.stock} y ID: ${this.id}`)
+        alert(`Nuestros productos son:\nProducto: ${this.producto}, Precio: $${this.precio} y ID: ${this.id}`)
     }
     agregarCanasto(){
         subTotalCompra = subTotalCompra + this.precio
@@ -17,7 +17,7 @@ class Producto {
 // CREANDO OBJETOS GRACIAS AL CONSTRUCTOR
 
 const remera = new Producto("Remera Levis", 2500, 1);
-const pantalon = new Producto("Pantalon Jean Oscuro", 5000, 2);
+const pantalon = new Producto("Pantalon Jean Kove", 5000, 2);
 const zapatillas = new Producto("Zapatillas Kove", 3500, 3);
 const gorra = new Producto("Gorra Kove", 1000, 4);
 const campera = new Producto("Campera Kove", 4500, 5);
@@ -46,76 +46,39 @@ carritoIcono.onclick = () => {
 
 // CARRITO CERRADO
 
+// BUSCADOR PAGINA
 
+const btn2 = document.getElementById("buscadorBoton")
 
+btn2.addEventListener("click", () => {
 
+    const input = document.getElementById("entrada")
+    const productoBuscado = input.value
+    const buscadorContainer = document.querySelector(".buscador-productos")
 
-// // BUSCADOR DE PRODUCTOS
+    const resultado = listaDeProductos.find((buscaProductos) => 
+    buscaProductos.producto === productoBuscado)
 
-// const btn2 = document.getElementById("buscadorBoton")
+    if (resultado) {
 
-// btn2.addEventListener("click", () => {
+        let contenedor = document.createElement("div")
+        let contenido = 
+        `<h3>El producto que usted busco es:</h3> 
+        <p>El producto es ${resultado.producto} y su precio es: $${resultado.precio}.</p>`
+        contenedor.innerHTML = contenido
+        buscadorContainer.append(contenedor)
+    
+    } else {
 
-//     const input = document.getElementById("entrada")
-//     let productoBuscado = input.value
-//     console.log(productoBuscado);
-//     const buscadorContainer = document.querySelector(".buscador-productos")
+        let contenedor = document.createElement("div")
+        let contenido = 
+        `<h3>No existe ese producto!</h3>`
+        contenedor.innerHTML = contenido
+        buscadorContainer.append(contenedor)
 
-//     if (productoBuscado == "Remera" || productoBuscado == "remera"){
+    }
 
-//         let contenedor = document.createElement("div")
-//         let contenido =
-//         `<h3>El producto que usted busco es:</h3> 
-//         <p>El producto es ${listaDeProductos[0].producto} y su precio es: $${listaDeProductos[0].precio}.</p>`
-//         contenedor.innerHTML = contenido
-//         buscadorContainer.append(contenedor)
-
-//     } else if (productoBuscado == "Pantalon" || productoBuscado == "pantalon") {
-
-//         let contenedor = document.createElement("div")
-//         let contenido =
-//         `<h3>El producto que usted busco es:</h3> 
-//         <p>El producto es ${listaDeProductos[1].producto} y su precio es: $${listaDeProductos[1].precio}.</p>`
-//         contenedor.innerHTML = contenido
-//         buscadorContainer.append(contenedor)
-
-//     } else if (productoBuscado == "Zapatillas" || productoBuscado == "zapatillas") {
-
-//         let contenedor = document.createElement("div")
-//         let contenido = 
-//         `<h3>El producto que usted busco es:</h3> 
-//         <p>El producto es ${listaDeProductos[2].producto} y su precio es: $${listaDeProductos[2].precio}.</p>`
-//         contenedor.innerHTML = contenido
-//         buscadorContainer.append(contenedor)
-
-//     } else if (productoBuscado == "Gorra" || productoBuscado == "gorra") {
-
-//         let contenedor = document.createElement("div")
-//         let contenido =  
-//         `<h3>El producto que usted busco es:</h3> 
-//         <p>El producto es ${listaDeProductos[3].producto} y su precio es: $${listaDeProductos[3].precio}.</p>`
-//         contenedor.innerHTML = contenido
-//         buscadorContainer.append(contenedor)
-
-//     } else if (productoBuscado == "Campera" || productoBuscado == "campera") {
-
-//         let contenedor = document.createElement("div")
-//         let contenido = 
-//         `<h3>El producto que usted busco es:</h3> 
-//         <p>El producto es ${listaDeProductos[4].producto} y su precio es: $${listaDeProductos[4].precio}.</p>`
-//         contenedor.innerHTML = contenido
-//         buscadorContainer.append(contenedor)
-
-//     } else {
-
-//         let contenedor = document.createElement("div")
-//         let contenido =  
-//         `<h4>El producto que busca no se encuentra disponible.</h4>`
-//         contenedor.innerHTML = contenido
-//         buscadorContainer.append(contenedor)
-
-//     }
-// })
+})
 
 // Comienzo el if dependiendo lo que seleccione el usuario en el confirm, mostramos nuestros productos uno por uno y el usuario ingresa que prendas desea comprar
 
