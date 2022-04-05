@@ -71,7 +71,7 @@ btn2.addEventListener("click", () => {
 
 const lista = document.getElementById("comentariosPagina") 
 
-fetch('/data.json')
+fetch('./data.json')
     .then( (res) => res.json())
     .then( data => {
         data.forEach((comentario) => {
