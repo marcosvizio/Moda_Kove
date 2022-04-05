@@ -26,25 +26,12 @@ const campera = new Producto("Campera Kove", 4500, 5);
 
 const listaDeProductos = [];
 listaDeProductos.push(remera,pantalon,zapatillas,gorra,campera)
+console.log(listaDeProductos);
 
 // METODO FILTER AL ARRAY
 
 const productosBaratos = listaDeProductos.filter(producto => producto.precio < 4000)
 console.log(productosBaratos);
-
-// CARRITO DE COMPRAS
-
-let carritoIcono = document.querySelector('#cart-icon')
-let carrito = document.querySelector('.cart')
-let carritoClose = document.querySelector('#close-cart')
-
-// CARRITO ABIERTO
-
-carritoIcono.onclick = () => {
-    carrito.classList.add("activo")
-};
-
-// CARRITO CERRADO
 
 // BUSCADOR PAGINA
 
@@ -80,6 +67,23 @@ btn2.addEventListener("click", () => {
 
 })
 
+// Implemento FETCH 
+
+const lista = document.getElementById("comentariosPagina") 
+
+fetch('/data.json')
+    .then( (res) => res.json())
+    .then( data => {
+        data.forEach((comentario) => {
+            const listaComentarios = document.createElement("div")
+            listaComentarios.innerHTML = `
+            <h5>${comentario.usuario}</h5>
+            <p>${comentario.Compra}</p>
+            <p>${comentario.Comentario}</p>`
+            lista.append(listaComentarios)
+        });
+    })
+
 // Comienzo el if dependiendo lo que seleccione el usuario en el confirm, mostramos nuestros productos uno por uno y el usuario ingresa que prendas desea comprar
 
 let consultaComprar = confirm("Desea realizar alguna compra por nuestra tienda online?");
@@ -109,76 +113,87 @@ if (consultaComprar == false) {
 
     while (consultaComprar == true) {
 
-        let consultaPrenda = prompt("Que prenda desea comprar?\nEscriba 'Remera', 'Pantalon', 'Zapatillas', 'Gorra', 'Campera' o 'Finalizar' para terminar la compra!")
+        let consultaUsuario = prompt("Que prenda desea comprar?\nEscriba 'Remera', 'Pantalon', 'Zapatillas', 'Gorra', 'Campera' o 'Finalizar' para terminar la compra!")
 
-        switch (consultaPrenda) {
+        const prendaSeleccionada = listaDeProductos.find((consultaPrenda) => consultaPrenda.producto === consultaUsuario)
 
-            case "Remera":
-                alert("Hemos agregado una 'remera' a tu carrito!\nEl precio es: $"+remera["precio"])
-                remera.agregarCanasto()
-                carritoProductos++ //Operador ++
-                break
-
-            case "Pantalon":
-                alert("Hemos agregado un 'pantalon' a tu carrito!\nEl precio es: $"+pantalon["precio"]);
-                pantalon.agregarCanasto();
-                carritoProductos++
-                break
-
-            case "Zapatillas":
-                alert("Hemos agregado unas 'zapatillas' a tu carrito!\nEl precio es: $"+zapatillas["precio"])
-                zapatillas.agregarCanasto()
-                carritoProductos++
-                break
-
-            case "Gorra":
-                alert("Hemos agregado una 'gorra' a tu carrito!\nEl precio es: $"+gorra["precio"])
-                gorra.agregarCanasto()
-                carritoProductos++
-                break
-
-            case "Campera":
-                alert("Hemos agregado una 'campera' a tu carrito!\nEl precio es: $"+campera["precio"])
-                campera.agregarCanasto()
-                carritoProductos++
-                break
-
-            case "Finalizar":
-                consultaComprar = false
-                // Aplicamos la funcion flecha "finalizacionCompra" en el subtotal de la compra.
-                const finalizacionCompra = () => {
-
-                    if (subTotalCompra > 10000) {
-                        let interes = 1.21
-                        alert("La compra de el/los producto/s tendra un recargo del 21%")
-                        let totalAPagar = subTotalCompra * interes
-                        alert(`El total a pagar es $${totalAPagar} y se esta llevando ${carritoProductos} productos de Moda Kove`)
-                        function consultaPagar() {
-                            let edad = usuario.edad // Desestructuración
-                            edad < 18 ? alert("No puedes realizar la compra por favor llama a tu padre, madre o tutor para finalizar la compra.") : alert("El pago ha sido ingresado!") // Operador ternario
-                        }
-                        consultaPagar()
-                        return totalAPagar
-
-                    } else {
-                        let interes = 0
-                        alert("La compra de el/los producto/s no tendran ningún recargo")
-                        let totalAPagar = subTotalCompra + interes
-                        alert(`El total a pagar es $${totalAPagar} y se esta llevando ${carritoProductos} productos de Moda Kove`)
-                        function consultaPagar() {
-                            let edad = usuario.edad // Desestructuración 
-                            edad < 18 ? alert("No puedes realizar la compra por favor llama a tu padre, madre o tutor para finalizar la compra.") : alert("El pago ha sido ingresado!") // Operador ternario
-                        }
-                        consultaPagar()
-                        return totalAPagar
-
+        if (prendaSeleccionada) {
+            alert(`Hemos agregado una '${prendaSeleccionada.producto}' a tu carrito!\nEl precio es: $${prendaSeleccionada.precio}`)
+            prendaSeleccionada.agregarCanasto()
+            carritoProductos++ //Operador ++
+        } else if (consultaUsuario == "Finalizar") {
+            consultaComprar = false
+            // Aplicamos la funcion flecha "finalizacionCompra" en el subtotal de la compra.
+            const finalizacionCompra = () => {
+                if (subTotalCompra > 10000) {
+                    let interes = 1.21
+                    alert("La compra de el/los producto/s tendra un recargo del 21%")
+                    let totalAPagar = subTotalCompra * interes
+                    alert(`El total a pagar es $${totalAPagar} y se esta llevando ${carritoProductos} productos de Moda Kove`)
+                    function consultaPagar() {
+                        let edad = usuario.edad // Desestructuración
+                        edad < 18 ? alert("No puedes realizar la compra por favor llama a tu padre, madre o tutor para finalizar la compra.") : alert("El pago ha sido ingresado!") // Operador ternario
+                    }
+                    consultaPagar()
+                    return totalAPagar
+                } else {
+                    let interes = 0
+                    alert("La compra de el/los producto/s no tendran ningún recargo")
+                    let totalAPagar = subTotalCompra + interes
+                    alert(`El total a pagar es $${totalAPagar} y se esta llevando ${carritoProductos} productos de Moda Kove`)
+                    function consultaPagar() {
+                        let edad = usuario.edad // Desestructuración 
+                        edad < 18 ? alert("No puedes realizar la compra por favor llama a tu padre, madre o tutor para finalizar la compra.") : alert("El pago ha sido ingresado!") // Operador ternario
+                    }
+                    consultaPagar()
+                    return totalAPagar
                     }
                 }
-                finalizacionCompra(0)
-                break
-            default:
-                alert("No has seleccionado ninguna opción, por favor ingrese correctamente lo que desee!")   
+            finalizacionCompra(0)
+            break
+        } else {
+            alert("No has seleccionado ninguna opción, por favor ingrese correctamente lo que desee!")
         }
     }
 }
 
+
+
+
+        // switch (consultaPrenda) {
+
+        //     case "Remera":
+        //         alert("Hemos agregado una 'remera' a tu carrito!\nEl precio es: $"+remera["precio"])
+        //         remera.agregarCanasto()
+        //         carritoProductos++ //Operador ++
+        //         break
+
+        //     case "Pantalon":
+        //         alert("Hemos agregado un 'pantalon' a tu carrito!\nEl precio es: $"+pantalon["precio"]);
+        //         pantalon.agregarCanasto();
+        //         carritoProductos++
+        //         break
+
+        //     case "Zapatillas":
+        //         alert("Hemos agregado unas 'zapatillas' a tu carrito!\nEl precio es: $"+zapatillas["precio"])
+        //         zapatillas.agregarCanasto()
+        //         carritoProductos++
+        //         break
+
+        //     case "Gorra":
+        //         alert("Hemos agregado una 'gorra' a tu carrito!\nEl precio es: $"+gorra["precio"])
+        //         gorra.agregarCanasto()
+        //         carritoProductos++
+        //         break
+
+        //     case "Campera":
+        //         alert("Hemos agregado una 'campera' a tu carrito!\nEl precio es: $"+campera["precio"])
+        //         campera.agregarCanasto()
+        //         carritoProductos++
+        //         break
+
+        //     case "Finalizar":
+                
+        //     default:
+                
+        // }
