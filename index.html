@@ -18,7 +18,7 @@
     <!-- HEADER -->
     <header class="header">
         <div class="nav container">
-            <a href="#" class="logo">MODA KOVE</a>
+            <a href="./index.html" class="logo">MODA KOVE</a>
             <!-- CARRITO DE COMPRAS ICONO -->
             <i class='bx bx-shopping-bag' id="cart-icon"></i>
             <!-- CARRITO -->
@@ -26,16 +26,7 @@
                 <h2 class="cart-title">Carrito</h2>
                 <!-- CONTENIDO DEL CARRITO -->
                 <div class="cart-content">
-                    <div class="cart-box">
-                        <img src="./img/pantalon_jean.jpg" alt="" height="150px" class="cart-img">
-                        <div class="detail-box">
-                            <div class="cart-product-title">REMERA</div>
-                            <div class="cart-price">25</div>
-                            <input type="number" value="1" class="cart-quantity">
-                        </div>
-                        <!-- REMOVER CARRITO -->
-                        <i class='bx bxs-trash-alt cart-remove'></i>
-                    </div>
+                    
                 </div>
                 <!-- TOTAL -->
                 <div class="total">
@@ -43,7 +34,7 @@
                     <div class="total-price">$0</div>
                 </div>
                 <!-- BOTON DE COMPRAR -->
-                <button type="button" class="btn-buy">Comprar ahora</button>
+                <button type="button" class="btn-buy">COMPRAR</button>
                 <!-- CERRAR CARRITO -->
                 <i class='bx bx-x' id="close-cart"></i>
             </div>
@@ -59,52 +50,58 @@
             <h2 class="section-title">¡NUESTROS PRODUCTOS!</h2>
             <!-- BUSCADOR -->
             <div>
-                <p>Escriba el nombre del producto que busca: <input type="text" name="" id="entrada"><button id="buscadorBoton">Buscar</button>
+                <p class="buscador__texto">Escriba el nombre del producto que busca: <input type="text" name="" id="entrada" class="buscador__input"><button id="buscadorBoton" class="buscador_boton">Buscar</button>
                 <div class="buscador-productos"></div>
             </div>
             <!-- CONTENIDO DE LA TIENDA -->
             <div class="shop-content">
                 <!-- CAJA 1 -->
                 <div class="product-box">
-                    <img src="./img/remera_kove.jpg" alt="Remera Levis Blanca" class="product-img">
-                    <h2 class="product-title">REMERA URBAN KOVE</h2>
-                    <span class="price">$2500</span>
+                    <img src="./img/pollera_kove.jpg" alt="Pollera Inglesa Verde Kove" class="product-img">
+                    <h2 class="product-title">POLLERA INGLESA VERDE</h2>
+                    <span class="price">$5000</span>
                     <i class='bx bx-shopping-bag add-cart'></i>
                 </div>
                 <!-- CAJA 2 -->
                 <div class="product-box">
-                    <img src="./img/pantalon_jean.jpg" alt="Pantalon Jean Oscuro Kove" class="product-img">
-                    <h2 class="product-title">PANTALON JEAN KOVE</h2>
-                    <span class="price">$5000</span>
+                    <img src="./img/tapado_kove.jpg" alt="Tapado Estilo Ingles Claro" class="product-img">
+                    <h2 class="product-title">TAPADO CLARO ESTILO INGLES</h2>
+                    <span class="price">$10000</span>
                     <i class='bx bx-shopping-bag add-cart'></i>
                 </div>
                 <!-- CAJA 3 -->
                 <div class="product-box">
-                    <img src="./img/zapatillas_kove.jpg" alt="Zapatillas Original Kove" class="product-img">
-                    <h2 class="product-title">ZAPATILLAS ORIGINAL KOVE</h2>
-                    <span class="price">$3500</span>
+                    <img src="./img/zapatillas_kove.jpg" alt="Zapatillas Urbanas Kove" class="product-img">
+                    <h2 class="product-title">ZAPATILLAS URBANAS KOVE</h2>
+                    <span class="price">$7000</span>
                     <i class='bx bx-shopping-bag add-cart'></i>
                 </div>
                 <!-- CAJA 4 -->
                 <div class="product-box">
-                    <img src="./img/gorra_kove.jpg" alt="Gorra Urban Kove" class="product-img">
-                    <h2 class="product-title">GORRA URBAN KOVE</h2>
-                    <span class="price">$1000</span>
+                    <img src="./img/pantalon_jean.jpg" alt="Pantalon Claro Estilo Oversize" class="product-img">
+                    <h2 class="product-title">PANTALON CLARO ORIGINAL KOVE</h2>
+                    <span class="price">$8500</span>
                     <i class='bx bx-shopping-bag add-cart'></i>
                 </div>
                 <!-- CAJA 5 -->
                 <div class="product-box">
-                    <img src="./img/campera_kove.jpg" alt="Campera Adidas Colaboracion Kove" class="product-img">
-                    <h2 class="product-title">CAMPERA KOVE COLABORACION ADIDAS</h2>
-                    <span class="price">$4500</span>
+                    <img src="./img/campera_negra.jpg" alt="Campera Negra de Abrigo" class="product-img">
+                    <h2 class="product-title">CAMPERA NEGRA DE ABRIGO</h2>
+                    <span class="price">$12000</span>
+                    <i class='bx bx-shopping-bag add-cart'></i>
+                </div>
+                <!-- CAJA 6 -->
+                <div class="product-box">
+                    <img src="./img/tapado_marron.jpg" alt="Tapado Marron" class="product-img">
+                    <h2 class="product-title">TAPADO MARRON KOVE</h2>
+                    <span class="price">$12000</span>
                     <i class='bx bx-shopping-bag add-cart'></i>
                 </div>
             </div>
         </section>
         <!-- SECCION DE COMENTARIOS -->
-        <div id="comentariosPagina">
+        <div id="comentariosPagina" class="comentarios__container">
             <h3>Comentarios de nuestros clientes!</h3>
-            <hr>
         </div>
     </main> 
     <!-- FOOTER -->
@@ -115,6 +112,9 @@
         </div>
     </footer>
     <!-- JS -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="./js/clases.js"></script>
+    <script src="./js/carrito.js"></script>
     <script src="./js/main.js"></script>
 </body>
 </html>

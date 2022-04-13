@@ -1,31 +1,7 @@
-// CONSTRUCTOR DE OBJETOS
-
-class Producto {
-    constructor (nombreProducto,precio,id) {
-        this.producto = nombreProducto;
-        this.precio = parseFloat(precio);
-        this.id = parseInt(id)
-    }
-    mostrarProducto(){
-        alert(`Nuestros productos son:\nProducto: ${this.producto}, Precio: $${this.precio} y ID: ${this.id}`)
-    }
-    agregarCanasto(){
-        subTotalCompra = subTotalCompra + this.precio
-    }
-}
-
-// CREANDO OBJETOS GRACIAS AL CONSTRUCTOR
-
-const remera = new Producto("Remera Levis", 2500, 1);
-const pantalon = new Producto("Pantalon Jean Kove", 5000, 2);
-const zapatillas = new Producto("Zapatillas Kove", 3500, 3);
-const gorra = new Producto("Gorra Kove", 1000, 4);
-const campera = new Producto("Campera Kove", 4500, 5);
-
 // ARRAY CON TODOS LOS OBJETOS CREADOS
 
 const listaDeProductos = [];
-listaDeProductos.push(remera,pantalon,zapatillas,gorra,campera)
+listaDeProductos.push()
 console.log(listaDeProductos);
 
 // METODO FILTER AL ARRAY
@@ -71,15 +47,15 @@ btn2.addEventListener("click", () => {
 
 const lista = document.getElementById("comentariosPagina") 
 
-fetch('./data.json')
+fetch('../data.json')
     .then( (res) => res.json())
     .then( data => {
         data.forEach((comentario) => {
             const listaComentarios = document.createElement("div")
             listaComentarios.innerHTML = `
-            <h5>${comentario.usuario}</h5>
-            <p>${comentario.Compra}</p>
-            <p>${comentario.Comentario}</p>`
+            <p>USUARIO: ${comentario.usuario}</p>
+            <p>ARTICULO: ${comentario.Compra}</p>
+            <p class="comentarios__container--parrafoComentario">COMENTARIO: ${comentario.Comentario}</p>`
             lista.append(listaComentarios)
         });
     })
@@ -156,44 +132,3 @@ if (consultaComprar == false) {
         }
     }
 }
-
-
-
-
-        // switch (consultaPrenda) {
-
-        //     case "Remera":
-        //         alert("Hemos agregado una 'remera' a tu carrito!\nEl precio es: $"+remera["precio"])
-        //         remera.agregarCanasto()
-        //         carritoProductos++ //Operador ++
-        //         break
-
-        //     case "Pantalon":
-        //         alert("Hemos agregado un 'pantalon' a tu carrito!\nEl precio es: $"+pantalon["precio"]);
-        //         pantalon.agregarCanasto();
-        //         carritoProductos++
-        //         break
-
-        //     case "Zapatillas":
-        //         alert("Hemos agregado unas 'zapatillas' a tu carrito!\nEl precio es: $"+zapatillas["precio"])
-        //         zapatillas.agregarCanasto()
-        //         carritoProductos++
-        //         break
-
-        //     case "Gorra":
-        //         alert("Hemos agregado una 'gorra' a tu carrito!\nEl precio es: $"+gorra["precio"])
-        //         gorra.agregarCanasto()
-        //         carritoProductos++
-        //         break
-
-        //     case "Campera":
-        //         alert("Hemos agregado una 'campera' a tu carrito!\nEl precio es: $"+campera["precio"])
-        //         campera.agregarCanasto()
-        //         carritoProductos++
-        //         break
-
-        //     case "Finalizar":
-                
-        //     default:
-                
-        // }
