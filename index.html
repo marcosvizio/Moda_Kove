@@ -50,53 +50,12 @@
             <h2 class="section-title">¡NUESTROS PRODUCTOS!</h2>
             <!-- BUSCADOR -->
             <div>
-                <p class="buscador__texto">Escriba el nombre del producto que busca: <input type="text" name="" id="entrada" class="buscador__input"><button id="buscadorBoton" class="buscador_boton">Buscar</button>
+                <p class="buscador__texto">Escriba el nombre del producto que busca: <input type="text" name="" id="entrada" class="buscador__input"><button id="buscadorBoton" class="buscador_boton"><i class='bx bx-search-alt'></i></button>
                 <div class="buscador-productos"></div>
             </div>
             <!-- CONTENIDO DE LA TIENDA -->
             <div class="shop-content">
-                <!-- CAJA 1 -->
-                <div class="product-box">
-                    <img src="./img/pollera_kove.jpg" alt="Pollera Inglesa Verde Kove" class="product-img">
-                    <h2 class="product-title">POLLERA INGLESA VERDE</h2>
-                    <span class="price">$5000</span>
-                    <i class='bx bx-shopping-bag add-cart'></i>
-                </div>
-                <!-- CAJA 2 -->
-                <div class="product-box">
-                    <img src="./img/tapado_kove.jpg" alt="Tapado Estilo Ingles Claro" class="product-img">
-                    <h2 class="product-title">TAPADO CLARO ESTILO INGLES</h2>
-                    <span class="price">$10000</span>
-                    <i class='bx bx-shopping-bag add-cart'></i>
-                </div>
-                <!-- CAJA 3 -->
-                <div class="product-box">
-                    <img src="./img/zapatillas_kove.jpg" alt="Zapatillas Urbanas Kove" class="product-img">
-                    <h2 class="product-title">ZAPATILLAS URBANAS KOVE</h2>
-                    <span class="price">$7000</span>
-                    <i class='bx bx-shopping-bag add-cart'></i>
-                </div>
-                <!-- CAJA 4 -->
-                <div class="product-box">
-                    <img src="./img/pantalon_jean.jpg" alt="Pantalon Claro Estilo Oversize" class="product-img">
-                    <h2 class="product-title">PANTALON CLARO ORIGINAL KOVE</h2>
-                    <span class="price">$8500</span>
-                    <i class='bx bx-shopping-bag add-cart'></i>
-                </div>
-                <!-- CAJA 5 -->
-                <div class="product-box">
-                    <img src="./img/campera_negra.jpg" alt="Campera Negra de Abrigo" class="product-img">
-                    <h2 class="product-title">CAMPERA NEGRA DE ABRIGO</h2>
-                    <span class="price">$12000</span>
-                    <i class='bx bx-shopping-bag add-cart'></i>
-                </div>
-                <!-- CAJA 6 -->
-                <div class="product-box">
-                    <img src="./img/tapado_marron.jpg" alt="Tapado Marron" class="product-img">
-                    <h2 class="product-title">TAPADO MARRON KOVE</h2>
-                    <span class="price">$12000</span>
-                    <i class='bx bx-shopping-bag add-cart'></i>
-                </div>
+             
             </div>
         </section>
         <!-- SECCION DE COMENTARIOS -->
@@ -111,6 +70,15 @@
             <p class="footer__comision">Comision 30315</p>
         </div>
     </footer>
+    <!-- TEMPLATE CONTAINERS DE PRODUCTOS -->
+    <template id="template-containerProductos">
+        <div class="product-box">
+            <img src="" alt="" class="product-img">
+            <h2 class="product-title"></h2>
+            <span class="price"></span>
+            <i class='bx bx-shopping-bag add-cart'></i>
+        </div>
+    </template>
     <!-- JS -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="./js/clases.js"></script>
