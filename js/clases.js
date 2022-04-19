@@ -1,5 +1,4 @@
 // CONSTRUCTOR DE OBJETOS
-
 class Producto {
     constructor (nombreProducto,precio,img,id) {
         this.nombreProducto = nombreProducto;
@@ -8,9 +7,7 @@ class Producto {
         this.id = parseInt(id)
     }
 }
-
 // CREANDO OBJETOS GRACIAS AL CONSTRUCTOR
-
 const polleraInglesa = new Producto("Pollera Inglesa Kove", 7000, "pollera_kove.jpg", 1);
 const tapadoIngles = new Producto("Tapado Claro Ingles Kove", 15500, "tapado_kove.jpg", 2);
 const zapatillasKove = new Producto("Zapatillas Kove", 9500, "zapatillas_kove.jpg", 3);

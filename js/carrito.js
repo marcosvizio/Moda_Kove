@@ -1,38 +1,27 @@
 // CARRITO
-
 let carritoIcono = document.querySelector("#cart-icon")
 let carrito = document.querySelector(".cart")
 let carritoCerrado = document.querySelector("#close-cart")
 let listaDeCarrito = [];
-
-
 // CHECKEA EL CARRITO LOCAL STORAGE 
-
 document.addEventListener('DOMContentLoaded', () => {
     checkCarritoLocalStorage();
 })
-
-
 // CARRITO ABIERTO
 carritoIcono.onclick = () =>{
     carrito.classList.add("active")
 }
-
 // CARRITO CERRADO
 carritoCerrado.onclick = () =>{
     carrito.classList.remove("active")
 }
-
 // CARRITO WORKING JS
-
 if (document.readyState == "loading") {
     document.addEventListener("DOMContentLoaded", ready);
 } else{
     ready();
 }
-
 // FUNCTION DEL CARRITO
-
 function ready() {
     // PARA REMOVER PRODUCTOS DEL CARRITO
     const removerCarritoBotones = document.getElementsByClassName("cart-remove")
@@ -67,14 +56,12 @@ function ready() {
         actualizarTotal();
     })
 }
-
 // REMOVER PRODUCTOS DEL CARRITO
 function removerCarritoItem(event) {
     const btnClicked = event.target
     btnClicked.parentElement.remove()
     actualizarTotal()
 }
-
 // CAMBIOS EN CANTIDAD PRODUCTOS 
 function cambiosCantidad(event) {
     const input = event.target
@@ -83,7 +70,6 @@ function cambiosCantidad(event) {
     }
     actualizarTotal();
 }
-
 function agregarCarritoClicked(event) {
     const btn = event.target
     const compraProductos = btn.parentElement
@@ -102,9 +88,7 @@ function agregarCarritoClicked(event) {
     agregarProductoAlCarrito(titulo, precio, imagenProducto);
     actualizarTotal();
 }
-
 // CARRITO EN LOCAL STORAGE
-
 const checkCarritoLocalStorage = () => {
     const carritoStorage = localStorage.getItem("Carrito")
     if (carritoStorage) {
@@ -114,17 +98,14 @@ const checkCarritoLocalStorage = () => {
                 agregarProductoAlCarrito(producto.nombreProducto,producto.precio,producto.img);  
             }
         });
-        
     }
 }
-
 // AGREGAR PRODUCTO AL CARRITO
 function agregarProductoAlCarrito(titulo, precio, imagenProducto) {
     const contenedorCompraCarrito = document.createElement("div")
     contenedorCompraCarrito.classList.add("cart-box")
     const itemsCarrito = document.getElementsByClassName("cart-content")[0]
     const nombresItemsCarrito = itemsCarrito.getElementsByClassName("cart-product-title")
-    
     for (let i = 0; i < nombresItemsCarrito.length; i++) {
         if (nombresItemsCarrito[i].innerText == titulo) {
             swal({
@@ -167,9 +148,6 @@ function actualizarTotal() {
         total = total + (precio * cantidad);
     }
         // SI EL PRECIO TIENE ALGUNOS CENTAVOS
-
         total = Math.round(total * 100) / 100;
-
         document.getElementsByClassName("total-price")[0].innerText = "$" + total;
-    
 }
