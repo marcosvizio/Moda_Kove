@@ -3,6 +3,15 @@
 let carritoIcono = document.querySelector("#cart-icon")
 let carrito = document.querySelector(".cart")
 let carritoCerrado = document.querySelector("#close-cart")
+let listaDeCarrito = [];
+
+
+// CHECKEA EL CARRITO LOCAL STORAGE 
+
+document.addEventListener('DOMContentLoaded', () => {
+    checkCarritoLocalStorage();
+})
+
 
 // CARRITO ABIERTO
 carritoIcono.onclick = () =>{
@@ -50,6 +59,7 @@ function ready() {
             icon: "success",
             button: "Ok",
           });
+        localStorage.clear()
         const contenidoCarrito = document.getElementsByClassName("cart-content")[0]
         while (contenidoCarrito.hasChildNodes()) {
             contenidoCarrito.removeChild(contenidoCarrito.firstChild)
@@ -80,8 +90,32 @@ function agregarCarritoClicked(event) {
     const titulo = compraProductos.getElementsByClassName("product-title")[0].innerText
     const precio = compraProductos.getElementsByClassName("price")[0].innerText
     const imagenProducto = compraProductos.getElementsByClassName("product-img")[0].src
+    const idProducto = compraProductos.querySelector('.productsContainer__item__button').dataset.id
+    const producto = {
+        id : idProducto,
+        nombreProducto : titulo,
+        precio : precio,
+        img : imagenProducto
+    }
+    listaDeCarrito[producto.id] = { ...producto }
+    localStorage.setItem("Carrito", JSON.stringify(listaDeCarrito))
     agregarProductoAlCarrito(titulo, precio, imagenProducto);
     actualizarTotal();
+}
+
+// CARRITO EN LOCAL STORAGE
+
+const checkCarritoLocalStorage = () => {
+    const carritoStorage = localStorage.getItem("Carrito")
+    if (carritoStorage) {
+        listaDeCarrito = JSON.parse(carritoStorage)
+        listaDeCarrito.forEach(producto => {
+            if (producto) {
+                agregarProductoAlCarrito(producto.nombreProducto,producto.precio,producto.img);  
+            }
+        });
+        
+    }
 }
 
 // AGREGAR PRODUCTO AL CARRITO
@@ -90,10 +124,12 @@ function agregarProductoAlCarrito(titulo, precio, imagenProducto) {
     contenedorCompraCarrito.classList.add("cart-box")
     const itemsCarrito = document.getElementsByClassName("cart-content")[0]
     const nombresItemsCarrito = itemsCarrito.getElementsByClassName("cart-product-title")
+    
     for (let i = 0; i < nombresItemsCarrito.length; i++) {
         if (nombresItemsCarrito[i].innerText == titulo) {
             swal({
                 title: "Ya tienes este producto en tu carrito!",
+                text: "Si deseas agregar mas unidades puedes hacerlo desde el carrito!",
                 icon: "error",
                 button: "Ok",
               });

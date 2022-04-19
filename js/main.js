@@ -2,7 +2,6 @@
 
 const listaDeProductos = [];
 listaDeProductos.push(polleraInglesa,tapadoIngles,zapatillasKove,pantalonClaro,camperaKove,tapadoMarron,camperaUrbanaBlanca,sueterMarronKove,pantalonCuadrilleClaro)
-console.log(listaDeProductos);
 
 // PRODUCTOS EN PAGINA
 
@@ -19,17 +18,12 @@ function cargaContainerProductos(datos) {
         templateContainerProductos.querySelectorAll("img")[0].setAttribute("alt", `${producto.nombreProducto}`)
         templateContainerProductos.querySelector("h2").textContent = `${producto.nombreProducto}`
         templateContainerProductos.querySelector("span").textContent = `$${producto.precio}`
-        
+        templateContainerProductos.querySelector('i').dataset.id = producto.id;
         const clone = templateContainerProductos.cloneNode(true)
         fragmentProduct.appendChild(clone);
     });
     containerProductos.appendChild(fragmentProduct);
 }
-
-// METODO FILTER DE ARRAY PRODUCTOS
-
-const productosBaratos = listaDeProductos.filter(producto => producto.precio < 4000)
-console.log(productosBaratos);
 
 // BUSCADOR PAGINA
 
