@@ -7,6 +7,19 @@ let listaDeCarrito = [];
 document.addEventListener('DOMContentLoaded', () => {
     checkCarritoLocalStorage();
 })
+// CARRITO EN LOCAL STORAGE
+const checkCarritoLocalStorage = () => {
+    const carritoStorage = localStorage.getItem("Carrito")
+    if (carritoStorage) {
+        listaDeCarrito = JSON.parse(carritoStorage)
+        listaDeCarrito.forEach(producto => {
+            if (producto) {
+                agregarProductoAlCarrito(producto.nombreProducto,producto.precio,producto.img);
+                actualizarTotal();  
+            }
+        });
+    }
+}
 // CARRITO ABIERTO
 carritoIcono.onclick = () =>{
     carrito.classList.add("active")
@@ -87,18 +100,6 @@ function agregarCarritoClicked(event) {
     localStorage.setItem("Carrito", JSON.stringify(listaDeCarrito))
     agregarProductoAlCarrito(titulo, precio, imagenProducto);
     actualizarTotal();
-}
-// CARRITO EN LOCAL STORAGE
-const checkCarritoLocalStorage = () => {
-    const carritoStorage = localStorage.getItem("Carrito")
-    if (carritoStorage) {
-        listaDeCarrito = JSON.parse(carritoStorage)
-        listaDeCarrito.forEach(producto => {
-            if (producto) {
-                agregarProductoAlCarrito(producto.nombreProducto,producto.precio,producto.img);  
-            }
-        });
-    }
 }
 // AGREGAR PRODUCTO AL CARRITO
 function agregarProductoAlCarrito(titulo, precio, imagenProducto) {
